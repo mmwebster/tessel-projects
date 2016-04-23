@@ -5,10 +5,9 @@ Installation (Global installs prevent from being added to the tessel's build):
 - npm install -g tessel
 - npm install -g transcend
 - create a const.js (details below)
-- transcend compile
-- tessel run build/lab.js [or push command]
+- bash run.sh [or push.sh]
 
-The const.js file requires the following definitions:
+The source/const.js file requires the following definitions:
 - - - - - - - - - - - - - - - - - - - - - - -
 var apiToken = "<XXX-YOUR-API-TOKEN-XXX>";
 var triggerLightLevel = <DESIRED-TRIGGER-LEVEL>; // float between 0 and 1 (non-inclusive)
