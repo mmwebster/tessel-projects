@@ -1,0 +1,4 @@
+{
+  "input": "./source",
+  "output": "./build"
+}
