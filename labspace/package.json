@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies" : {
-    "request"    : "latest"
+    "request"       : "latest",
+    "tessel"        : "latest",
+    "ambient-attx4" : "latest"
   }
 }
