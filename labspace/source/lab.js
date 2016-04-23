@@ -8,7 +8,7 @@ var request = require('request');
 // Wait for ambient module to be ready
 ambient.on('ready', function() {
 
-  //@if environment == "dev"
+  //@if env == "dev"
     console.log("[STATUS]: Ambient module ready");
   //@endif
 
@@ -23,7 +23,7 @@ ambient.on('ready', function() {
       if (err) throw err;
       lightFixed = light.toFixed(8);
 
-      //@if environment == "dev"
+      //@if env == "dev"
         console.log("[STATUS]: {light: " + lightFixed + ", statusChanged: " + statusChanged + ", currentStatus: " + currentStatus + "}");
       //@endif
 
@@ -32,14 +32,14 @@ ambient.on('ready', function() {
         currentStatus = false;
         statusChanged = true;
         newStatusText = "CLOSED";
-        //@if environment == "dev"
+        //@if env == "dev"
           console.log("[STATUS]: Lab is now CLOSED");
         //@endif
       } else if (light > triggerLightLevel && currentStatus == false) {
         currentStatus = true;
         statusChanged = true;
         newStatusText = "OPEN";
-        //@if environment == "dev"
+        //@if env == "dev"
           console.log("[STATUS]: Lab is now OPEN");
         //@endif
       } else if (currentStatus == undefined) {
@@ -49,7 +49,7 @@ ambient.on('ready', function() {
       // check if should update status
       if (statusChanged) {
         // now post to slack
-        //@if environment == "dev"
+        //@if env == "dev"
           console.log("[STATUS]: Posting new status to Slack");
         //@endif
         postData.text = "Lab is now " + newStatusText;
