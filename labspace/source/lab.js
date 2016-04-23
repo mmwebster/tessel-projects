@@ -2,6 +2,8 @@ var tessel = require('tessel');
 var ambientlib = require('ambient-attx4');
 var ambient = ambientlib.use(tessel.port['B']);
 var request = require('request');
+// *** Load in constants from const.js (including api token) ***
+//@require const.js
 
 // Wait for ambient module to be ready
 ambient.on('ready', function() {
@@ -9,9 +11,8 @@ ambient.on('ready', function() {
   console.log("[STATUS]: Ambient module ready");
 
   statusChanged = false;
-  currentStatus = false; // true=OPEN, false=CLOSED
-  triggerLightLevel = 0.21; // range from 0-1. ~.6 is VERY bright, ~.02 is dim
-  postData = {channel: "#lab-space", username: "Hall Monitor", text: ""};
+  currentStatus = undefined; // true=OPEN, false=CLOSED
+  postData = {channel: channel, username: username, text: ""};
   newStatusText = "";
 
   // poll the lab state and post to slack accordingly
@@ -34,6 +35,8 @@ ambient.on('ready', function() {
         statusChanged = true;
         newStatusText = "OPEN";
         console.log("[STATUS]: Lab is now OPEN");
+      } else if (currentStatus == undefined) {
+        currentStatus = (light >= triggeRightLevel); // initialize state on startup
       }
 
       // check if should update status
@@ -42,7 +45,7 @@ ambient.on('ready', function() {
         console.log("[STATUS]: Posting new status to Slack");
         postData.text = "Lab is now " + newStatusText;
         request.post({
-            url: "XXXXX-Webhooks-Token-XXXXX",
+            url: apiToken,
             method: "post",
             json: true,
             body: postData
@@ -55,7 +58,7 @@ ambient.on('ready', function() {
       }
 
     });
-  }, 15000);
+  }, pollRate);
 
 });
 

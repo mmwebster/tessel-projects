@@ -1,2 +1,5 @@
 transcend.json
-build.js
+build/
+node_modules/
+source/secret.js
+source/const.js
