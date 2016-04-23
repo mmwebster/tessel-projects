@@ -16,3 +16,7 @@ var refreshRate = 15000;
 var channel = "#<CHANNEL-NAME>";
 var username = "<BOT-NAME>";
 - - - - - - - - - - - - - - - - - - - - - - -
+
+Misc Notes:
+- Currently only works with tessel firmware version 0.1.19 and ambient module version 0.1.9
+- Switch between tessel firmware versions using: tessel update -b [version]
