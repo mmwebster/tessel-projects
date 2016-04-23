@@ -1,9 +1,10 @@
 Tessel project for Formula Slug lab space open/closed status notifier. Sends post requests to Slack Webhooks API to post to Formula Slug's #lab-space Slack channel.
 
-Installation:
+Installation (Global installs prevent from being added to the tessel's build):
 - npm install
+- npm install -g tessel
+- npm install -g transcend
 - create a const.js (details below)
-- sudo npm install -g transcend
 - transcend compile
 - tessel run build/lab.js [or push command]
 

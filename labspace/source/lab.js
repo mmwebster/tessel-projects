@@ -8,7 +8,9 @@ var request = require('request');
 // Wait for ambient module to be ready
 ambient.on('ready', function() {
 
-  console.log("[STATUS]: Ambient module ready");
+  //@if environment == "dev"
+    console.log("[STATUS]: Ambient module ready");
+  //@endif
 
   statusChanged = false;
   currentStatus = undefined; // true=OPEN, false=CLOSED
@@ -21,20 +23,25 @@ ambient.on('ready', function() {
       if (err) throw err;
       lightFixed = light.toFixed(8);
 
-      console.log("[STATUS]: {light: " + lightFixed + ", statusChanged: " + statusChanged + ", currentStatus: " + currentStatus + "}");
+      //@if environment == "dev"
+        console.log("[STATUS]: {light: " + lightFixed + ", statusChanged: " + statusChanged + ", currentStatus: " + currentStatus + "}");
+      //@endif
 
       // set status flag if light trigger reached
       if (light < triggerLightLevel && currentStatus == true) {
         currentStatus = false;
         statusChanged = true;
         newStatusText = "CLOSED";
-        console.log("[STATUS]: Lab is now CLOSED");
+        //@if environment == "dev"
+          console.log("[STATUS]: Lab is now CLOSED");
+        //@endif
       } else if (light > triggerLightLevel && currentStatus == false) {
-        console.log("light [" + light + "] >= triggerLightLevel [" + triggerLightLevel + "]");
         currentStatus = true;
         statusChanged = true;
         newStatusText = "OPEN";
-        console.log("[STATUS]: Lab is now OPEN");
+        //@if environment == "dev"
+          console.log("[STATUS]: Lab is now OPEN");
+        //@endif
       } else if (currentStatus == undefined) {
         currentStatus = (light >= triggeRightLevel); // initialize state on startup
       }
@@ -42,7 +49,9 @@ ambient.on('ready', function() {
       // check if should update status
       if (statusChanged) {
         // now post to slack
-        console.log("[STATUS]: Posting new status to Slack");
+        //@if environment == "dev"
+          console.log("[STATUS]: Posting new status to Slack");
+        //@endif
         postData.text = "Lab is now " + newStatusText;
         request.post({
             url: apiToken,

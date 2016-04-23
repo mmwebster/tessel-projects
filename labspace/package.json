@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies" : {
     "request"       : "latest",
-    "tessel"        : "latest",
     "ambient-attx4" : "latest"
   }
 }

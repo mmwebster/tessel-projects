@@ -1,4 +1,5 @@
 {
   "input": "./source",
-  "output": "./build"
+  "output": "./build",
+  "env": "dev"
 }
