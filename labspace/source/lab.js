@@ -34,8 +34,21 @@ ambient.on('ready', function() {
         currentStatus = (light >= triggerLightLevel);
 
         //@if env == "dev"
-           console.log("[STATUS]: Initialized status to " + currentStatus + " for values [" + light.toFixed(8) + "] >= " + triggerLightLevel);
-         //@endif
+           console.log("[STATUS]: Initialized status to " + currentStatus);
+        //@endif
+
+        // send "tessel initialized" message to logsChannel
+        request.post({
+            url: apiToken,
+            method: "post",
+            json: true,
+            body: {channel: logsChannel, username: postData.username, text: "[STATUS]: Tessel Initialized"}
+        }, function (error, response, body){
+          if(error) {
+            console.log(error);
+          }
+        });
+
       }
 
       // check if should change current status
